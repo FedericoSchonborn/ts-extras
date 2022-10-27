@@ -47,7 +47,7 @@ export function unwrap<T, E>(self: Result<T, E>): T {
     case "ok":
       return self.ok;
     case "error":
-      throw self.error;
+      throw new Error("call to Result.unwrap in error variant");
   }
 }
 
