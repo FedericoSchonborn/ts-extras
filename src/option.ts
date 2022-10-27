@@ -59,7 +59,7 @@ export function map<T, U>(self: Option<T>, f: (_: T) => U): Option<U> {
   }
 }
 
-export function intoOption<T>(
+export function ify<T>(
   f: (...args: unknown[]) => T | undefined,
   ...args: unknown[]
 ): Option<T> {

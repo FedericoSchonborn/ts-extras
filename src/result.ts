@@ -60,7 +60,7 @@ export function map<T, E, U>(self: Result<T, E>, f: (_: T) => U): Result<U, E> {
   }
 }
 
-export function intoResult<T>(
+export function ify<T>(
   f: (...args: unknown[]) => T,
   ...args: unknown[]
 ): Result<T, Error> {
