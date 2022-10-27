@@ -61,16 +61,17 @@ export function map<T, U>(self: Option<T>, f: (_: T) => U): Option<U> {
 
 export function ify<T>(
   f: (...args: unknown[]) => T | undefined,
-  ...args: unknown[]
-): Option<T> {
-  try {
-    const value = f(...args);
-    if (value !== undefined) {
-      return { type: "some", some: value };
-    } else {
+): (...args: unknown[]) => Option<T> {
+  return (...args) => {
+    try {
+      const value = f(...args);
+      if (value !== undefined) {
+        return { type: "some", some: value };
+      } else {
+        return { type: "none" };
+      }
+    } catch {
       return { type: "none" };
     }
-  } catch {
-    return { type: "none" };
-  }
+  };
 }

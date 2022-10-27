@@ -62,11 +62,12 @@ export function map<T, E, U>(self: Result<T, E>, f: (_: T) => U): Result<U, E> {
 
 export function ify<T>(
   f: (...args: unknown[]) => T,
-  ...args: unknown[]
-): Result<T, Error> {
-  try {
-    return { type: "ok", ok: f(...args) };
-  } catch (error) {
-    return { type: "error", error: error };
-  }
+): (...args: unknown[]) => Result<T, Error> {
+  return (...args) => {
+    try {
+      return { type: "ok", ok: f(...args) };
+    } catch (error) {
+      return { type: "error", error: error };
+    }
+  };
 }
